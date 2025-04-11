@@ -14,6 +14,7 @@ import com.sky.vo.EmployeeLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,7 +80,7 @@ public class EmployeeController {
     @PostMapping
     @ApiOperation(value = "新增")
     public Result save(@RequestBody EmployeeDTO employeeDTO) {
-        log.info("新增员工:{}",employeeDTO);
+        log.info("新增员工:{}", employeeDTO);
         employeeService.save(employeeDTO);
         return Result.success();
     }
@@ -87,8 +88,16 @@ public class EmployeeController {
     @GetMapping("/page")
     @ApiOperation(value = "分页")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
-        log.info("员工分页查询:{}",employeePageQueryDTO);
+        log.info("员工分页查询:{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    @PostMapping("/status/{status}")
+    @ApiOperation("修改员工状态")
+    public Result startOrStop(@PathVariable Integer status,long id ){
+        log.info("启用禁用员工账号:{},{}",status,id);
+        employeeService.startOrStop(status, id);
+        return Result.success();
     }
 }

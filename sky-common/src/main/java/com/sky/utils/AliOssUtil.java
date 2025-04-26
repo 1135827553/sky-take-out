@@ -7,7 +7,12 @@ import com.aliyun.oss.OSSException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
+
 import java.io.ByteArrayInputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -28,12 +33,17 @@ public class AliOssUtil {
      */
     public String upload(byte[] bytes, String objectName) {
 
+        String s1 = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+        String s2 = objectName.substring(objectName.lastIndexOf("."));
+        String s3 = UUID.randomUUID() + s2;
+        String objectName2 = s1 + "/" + s3;
+
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
         try {
             // 创建PutObject请求。
-            ossClient.putObject(bucketName, objectName, new ByteArrayInputStream(bytes));
+            ossClient.putObject(bucketName, objectName2, new ByteArrayInputStream(bytes));
         } catch (OSSException oe) {
             System.out.println("Caught an OSSException, which means your request made it to OSS, "
                     + "but was rejected with an error response for some reason.");
@@ -53,16 +63,17 @@ public class AliOssUtil {
         }
 
         //文件访问路径规则 https://BucketName.Endpoint/ObjectName
-        StringBuilder stringBuilder = new StringBuilder("https://");
+        /*StringBuilder stringBuilder = new StringBuilder("https://");
         stringBuilder
                 .append(bucketName)
                 .append(".")
                 .append(endpoint)
                 .append("/")
-                .append(objectName);
+                .append(objectName);*/
+        String s = endpoint.split("//")[0] + "//" + bucketName + "." + endpoint.split("//")[1] + "/" + objectName2;
 
-        log.info("文件上传到:{}", stringBuilder.toString());
+        log.info("文件上传到:{}", s);
 
-        return stringBuilder.toString();
+        return s.toString();
     }
 }

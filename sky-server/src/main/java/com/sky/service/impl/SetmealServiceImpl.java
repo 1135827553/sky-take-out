@@ -51,10 +51,10 @@ public class SetmealServiceImpl implements SetmealService {
     @Override
     public void startOrStop(Integer status, Long id) {
         //判断当前套餐能删除--套餐内包含未启售菜品，无法启售
-        if (status == StatusConstant.DISABLE) {
+        if (status == StatusConstant.ENABLE) {
             List<Dish> list =dishMapper.getBySetmealId(id);
             list.forEach(dish -> {
-                if (dish.getStatus() == StatusConstant.ENABLE) {
+                if (dish.getStatus() == StatusConstant.DISABLE) {
                     throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ENABLE_FAILED);
                 }
             });

@@ -22,4 +22,6 @@ public interface DishService {
     List<DishVO> getByCategoryId(Long id);
 
     List<DishVO> listWithFlavor(Long id);
+
+    void startOrStop(Integer status, Long id);
 }

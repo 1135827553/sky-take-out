@@ -45,6 +45,10 @@ public interface SetmealMapper {
     @AutoFill(value = OperationType.UPDATE)
     void update(Setmeal emp);
 
+    @Select("select * from setmeal where id=#{id}")
+    Setmeal getById(Long id);
+
+
     @Delete("delete from setmeal where id=#{id}")
     void deleteById(Long id);
 

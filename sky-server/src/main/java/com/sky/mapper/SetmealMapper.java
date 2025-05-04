@@ -31,7 +31,7 @@ public interface SetmealMapper {
     List<Setmeal> list(Setmeal setmeal);
 
     //根据套餐id查询菜品选项
-    @Select("select sd.copies,sd.description,d.image,d.name from setmeal_dish sd left join dish d on sd.dish_id=d.id where sd.setmeal_id=#{setmealId}")
+    @Select("select sd.copies,d.description,d.image,d.name from setmeal_dish sd left join dish d on sd.dish_id=d.id where sd.setmeal_id=#{setmealId}")
     List<DishItemVO> getDishItemBySetmealId(Long id);
 
     Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);

@@ -9,6 +9,8 @@ public interface UserMapper {
     @Select("select * from user where openid=#{openid}")
     User getByOpenId(String openId);
 
+    @Select("select * from user where id = #{id}")
+    User getById(Long userId);
 
     void insert(User user);
 }

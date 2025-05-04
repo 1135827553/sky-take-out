@@ -33,13 +33,13 @@ public class DishController {
     public Result<List<DishVO>> list(Long categoryId) {
         log.info("根据分类id查询菜品:{}",categoryId);
 
-        //构建redis的key
+        /*//构建redis的key
         String key="dish_"+categoryId;
         //查询redis中是否有值
         List<DishVO> redisDishList = (List<DishVO>) redisTemplate.opsForValue().get(key);
         if (redisDishList != null && redisDishList.size() > 0) {
             return Result.success(redisDishList);
-        }
+        }*/
 
         Dish dish = new Dish();
         dish.setId(categoryId);
@@ -47,7 +47,7 @@ public class DishController {
         List<DishVO> list=dishService.listWithFlavor(categoryId);
 
         //不存在就加入
-        redisTemplate.opsForValue().set(key,list);
+        //redisTemplate.opsForValue().set(key,list);
 
         return Result.success(list);
     }

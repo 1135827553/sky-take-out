@@ -59,11 +59,11 @@ sky:
 #    mchSerialNo: ${sky.wechat.mchid}
 #    privateKeyFilePath: ${sky.wechat.privateKeyFilePath}
 #    apiV3Key: ${sky.wechat.apiV3Key}
-#    weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
+#    weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath} 广东省深圳市福田区福中一路2001号
     notifyUrl: ${sky.wechat.notifyUrl}
     refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
-    shop:
-      address: 北京市海淀区上地十街10号
-    baidu:
-      ak:123123123
+  shop:
+    address: 广东省深圳市福田区福中一路2001号
+  baidu:
+      ak: lZDA9zAlNZ485adA6Q7HAg2zsxVPHPwc
 

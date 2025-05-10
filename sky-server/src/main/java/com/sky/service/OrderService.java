@@ -8,12 +8,15 @@ import com.sky.vo.OrderStatisticsVO;
 import com.sky.vo.OrderSubmitVO;
 import com.sky.vo.OrderVO;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 public interface OrderService {
-    OrderSubmitVO submit(OrdersSubmitDTO ordersSubmitDTO);
+    OrderSubmitVO submit(OrdersSubmitDTO ordersSubmitDTO) throws UnsupportedEncodingException;
 
     OrderPaymentVO payment(OrdersPaymentDTO ordersPaymentDTO) throws Exception;
 
-    void paySuccess(String outTradeNo);
+    void paySuccess(String outTradeNo) throws IOException;
 
     PageResult pageQuery(OrdersPageQueryDTO ordersPageQueryDTO);
 
@@ -23,7 +26,7 @@ public interface OrderService {
 
     void repetition(Long id);
 
-    void reminder(Long id);
+    void reminder(Long id) throws IOException;
 
     PageResult conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO);
 

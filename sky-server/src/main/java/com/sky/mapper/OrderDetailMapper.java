@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderDetailMapper {
@@ -13,4 +14,6 @@ public interface OrderDetailMapper {
     List<OrderDetail> getByOrderId(Long id);
 
     void insertBatch(ArrayList<OrderDetail> orderDetailsList);
+
+
 }

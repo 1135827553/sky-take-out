@@ -14,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 @RestController("userOrderController")
 @RequestMapping("/user/order")
 @Api(tags = "用户端订单相关接口")
@@ -24,7 +27,7 @@ public class OrderController {
 
     @PostMapping("/submit")
     @ApiOperation("用户下单")
-    public Result<OrderSubmitVO> submit(@RequestBody OrdersSubmitDTO orderSubmitDTO) {
+    public Result<OrderSubmitVO> submit(@RequestBody OrdersSubmitDTO orderSubmitDTO) throws UnsupportedEncodingException {
         log.info("用户下单，参数为：{}", orderSubmitDTO);
         OrderSubmitVO orderSubmitVO = orderService.submit(orderSubmitDTO);
         return Result.success(orderSubmitVO);
@@ -73,7 +76,7 @@ public class OrderController {
 
     @GetMapping("/reminder/{id}")
     @ApiOperation("订单催单")
-    public Result reminder(@PathVariable Long id) {
+    public Result reminder(@PathVariable Long id) throws IOException {
         log.info("订单催单：{}", id);
         orderService.reminder(id);
         return Result.success();
